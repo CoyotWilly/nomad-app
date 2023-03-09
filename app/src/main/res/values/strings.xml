@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Nomad</string>
+
+    <!--    Pages names-->
+    <string name="home_text">Home</string>
+    <string name="like_text">Like</string>
+    <string name="search_text">Search</string>
+    <string name="shop_text">Shop</string>
+</resources>
