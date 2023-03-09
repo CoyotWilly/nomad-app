@@ -1,6 +1,7 @@
 package com.coyotwilly.nomad
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
@@ -8,13 +9,13 @@ import com.google.android.material.navigation.NavigationBarView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navigationView: NavigationBarView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Text at the top of app hiding property
-         supportActionBar?.hide()
+        // sets transparent background for status bar
+        // REQUIRES SDK >= 24
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         navigationView = findViewById(R.id.bottom_navigation)
         supportFragmentManager.beginTransaction().replace(R.id.body_container, HomeFragment()).commit()
