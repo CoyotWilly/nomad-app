@@ -7,4 +7,9 @@
     <string name="search_text">Search</string>
     <string name="shop_text">Shop</string>
     <string name="active">Active</string>
+    <string name="destination_img">Destination place background image</string>
+    <string name="date_example">15 june - 28 june 2022</string>
+    <string name="new_trip_creator">new trip creator icon</string>
+    <string name="barcelona">Barcelona</string>
+    <string name="singapore">Singapore</string>
 </resources>
