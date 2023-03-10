@@ -139,12 +139,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/active_trip1"
-            android:layout_width="175dp"
+            android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_marginHorizontal="20dp"
             app:cardCornerRadius="11dp"
             app:cardElevation="11dp"
             app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toStartOf="@+id/active_trip2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/past_trips">
 
@@ -200,7 +201,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/active_trip2"
-            android:layout_width="175dp"
+            android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_marginHorizontal="20dp"
             app:cardCornerRadius="11dp"
@@ -212,8 +213,8 @@
 
             <ImageView
                 android:id="@+id/upcoming_trip_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/destination_img"
                 android:scaleType="fitXY"
                 android:src="@drawable/singapore" />
