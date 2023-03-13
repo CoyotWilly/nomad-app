@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_like -> fragment = LikeFragment()
                 R.id.nav_search -> fragment = SearchFragment()
                 R.id.nav_shop -> fragment = ShopFragment()
+                R.id.nav_person -> fragment = PersonFragment()
             }
             supportFragmentManager.beginTransaction().replace(R.id.body_container, fragment).commit()
             return@setNavigationItemSelectedListener true
