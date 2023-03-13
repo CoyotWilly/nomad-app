@@ -18,5 +18,10 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
+    
+    <style name="TextView.Bold" parent="Theme.Nomad">
+        <item name="android:textColor">#868686</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>
