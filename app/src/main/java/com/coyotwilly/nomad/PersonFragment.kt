@@ -21,6 +21,20 @@ class PersonFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (arguments?.getBoolean("wasSuccessful") == false){
+            biometricAuth()
+        }
+        System.err.println("onCreate")
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        System.err.println("onCreate View")
+        return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
+    }
+
+    private fun biometricAuth() {
         val biometricManager = BiometricManager.from(requireContext())
         when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)){
             BiometricManager.BIOMETRIC_SUCCESS -> Log.d("Nomad","App can authenticate using biometrics.")
@@ -45,17 +59,9 @@ class PersonFragment : Fragment(){
                 override fun onAuthenticationSucceeded(
                     result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    Toast.makeText(context,
-                        "Authentication succeeded!", Toast.LENGTH_SHORT)
-                        .show()
-                    System.err.println("AUTH successful")
-                    val temp = arguments?.getBoolean("wasSuccessful") ?: false
-                    if ((!temp) or (arguments?.getInt("id") == R.layout.fragment_person)){
-                        parentFragmentManager.beginTransaction()
-                            .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
-                            .commit()
-                    }
-
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
+                        .commit()
                 }
 
                 override fun onAuthenticationFailed(){
@@ -71,16 +77,7 @@ class PersonFragment : Fragment(){
             .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
             .build()
         biometricPrompt.authenticate(promptInfo)
-        System.err.println("onCreate")
     }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        System.err.println("onCreate View")
-        return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
