@@ -8,6 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/General.Background"
         tools:context=".HomeFragment">
 
         <ImageButton
@@ -29,279 +30,305 @@
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="48dp"
             android:text="@string/home_text"
-            android:textColor="@color/black"
             android:textSize="48sp"
-            android:textStyle="bold"
+            style="@style/TextView.Bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/trip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/active"
-            android:textColor="@color/black"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/homeTitle" />
-
-        <TextView
-            android:id="@+id/trip_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="24dp"
-            android:text="@string/active"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trip"
-            tools:ignore="VisualLintOverlap" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/active_trip"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/active_bg"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginHorizontal="20dp"
-            app:cardCornerRadius="11dp"
-            app:cardElevation="11dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trip">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/background_card_dark"
+            app:layout_constraintTop_toBottomOf="@id/homeTitle">
 
-            <ImageView
-                android:id="@+id/destination_background_img"
+            <TextView
+                android:id="@+id/trip"
+                style="@style/TextView.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/active"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/active_bg" />
+
+            <TextView
+                android:id="@+id/trip_counter"
+                style="@style/TextView.Additional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="24dp"
+                android:text="@string/active"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trip"
+                tools:ignore="VisualLintOverlap" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/active_trip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/paris"
-                android:contentDescription="@string/destination_img"
-                android:scaleType="fitXY" />
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trip_counter">
+
+                <ImageView
+                    android:id="@+id/destination_background_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/destination_img"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/paris" />
+
+                <TextView
+                    android:id="@+id/destination"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="35dp"
+                    android:text="@string/home_text"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/travel_period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/date_example"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <TextView
-                android:id="@+id/destination"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="35dp"
-                android:text="@string/home_text"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/travel_period"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/date_example"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="italic" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/past_trips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/home_text"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/active_trip" />
-
-        <TextView
-            android:id="@+id/past_trips_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="40dp"
-            android:text="@string/active"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/past_trips"
-            tools:ignore="VisualLintOverlap" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/active_trip1"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_marginHorizontal="20dp"
-            app:cardCornerRadius="11dp"
-            app:cardElevation="11dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toStartOf="@+id/active_trip2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/past_trips">
-
-            <ImageView
-                android:id="@+id/past_trip_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/destination_img"
-                android:scaleType="fitXY"
-                android:src="@drawable/barcelona" />
-
-            <TextView
-                android:id="@+id/past_trips_memo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/barcelona"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/upcoming_trips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/home_text"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/past_trips"
-            app:layout_constraintTop_toBottomOf="@+id/active_trip" />
-
-        <TextView
-            android:id="@+id/upcoming_trips_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="20dp"
-            android:text="@string/active"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/past_trips_counter"
-            app:layout_constraintTop_toBottomOf="@+id/upcoming_trips"
-            tools:ignore="VisualLintOverlap" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/active_trip2"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_marginHorizontal="20dp"
-            app:cardCornerRadius="11dp"
-            app:cardElevation="11dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/active_trip1"
-            app:layout_constraintTop_toBottomOf="@+id/past_trips">
-
-            <ImageView
-                android:id="@+id/upcoming_trip_background"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/destination_img"
-                android:scaleType="fitXY"
-                android:src="@drawable/singapore" />
-
-            <TextView
-                android:id="@+id/upcoming_trips_memo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/singapore"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/explore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/home_text"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/active_trip1" />
-
-        <TextView
-            android:id="@+id/explorer_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginStart="40dp"
-            android:text="@string/active"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/explore"
-            tools:ignore="VisualLintOverlap" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/community_exploration"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/past_bg"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginHorizontal="20dp"
-            app:cardCornerRadius="11dp"
-            app:cardElevation="11dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/explore">
-
-
-            <ImageView
-                android:id="@+id/community_exploration_background_img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/community"
-                android:contentDescription="@string/destination_img"
-                android:scaleType="fitXY" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/background_card_dark"
+            app:layout_constraintTop_toBottomOf="@id/active_bg">
 
             <TextView
-                android:id="@+id/community_exploration_place"
+                android:id="@+id/past_trips"
+                style="@style/TextView.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="35dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/home_text"
-                android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/community_exploration_when"
+                android:id="@+id/past_trips_counter"
+                style="@style/TextView.Additional"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/date_example"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="italic" />
+                android:layout_marginHorizontal="25dp"
+                android:text="@string/active"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/past_trips"
+                tools:ignore="VisualLintOverlap" />
 
-        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/active_trip1"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="-8dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@id/active_trip2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/past_trips">
+
+                <ImageView
+                    android:id="@+id/past_trip_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/destination_img"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/barcelona" />
+
+                <TextView
+                    android:id="@+id/past_trips_memo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/barcelona"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/upcoming_trips"
+                style="@style/TextView.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/home_text"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/past_trips"
+                app:layout_constraintTop_toTopOf="@+id/past_trips" />
+
+            <TextView
+                android:id="@+id/upcoming_trips_counter"
+                style="@style/TextView.Additional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/active"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/past_trips_counter"
+                app:layout_constraintTop_toBottomOf="@+id/upcoming_trips"
+                tools:ignore="VisualLintOverlap" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/active_trip2"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginEnd="-8dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/active_trip1"
+                app:layout_constraintTop_toBottomOf="@+id/past_trips">
+
+                <ImageView
+                    android:id="@+id/upcoming_trip_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/destination_img"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/singapore" />
+
+                <TextView
+                    android:id="@+id/upcoming_trips_memo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/singapore"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/community_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_card_dark"
+            android:layout_marginTop="36dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintTop_toBottomOf="@id/past_bg">
+
+            <TextView
+                android:id="@+id/explore"
+                style="@style/TextView.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/home_text"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/explorer_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:text="@string/active"
+                style="@style/TextView.Additional"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/explore"
+                tools:ignore="VisualLintOverlap" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/community_exploration"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                app:cardCornerRadius="11dp"
+                app:cardElevation="11dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/explore">
+
+
+                <ImageView
+                    android:id="@+id/community_exploration_background_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/community"
+                    android:contentDescription="@string/destination_img"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/community_exploration_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="35dp"
+                    android:text="@string/home_text"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/community_exploration_when"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/date_example"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

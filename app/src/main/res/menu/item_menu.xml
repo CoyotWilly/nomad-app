@@ -24,5 +24,4 @@
         android:id="@+id/nav_person"
         android:title="@string/person"
         android:icon="@drawable/ic_person"/>
-
 </menu>

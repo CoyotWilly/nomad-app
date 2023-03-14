@@ -19,4 +19,22 @@
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
+    <style name="General.Background" parent="Theme.Nomad">
+        <item name="android:background">#f7f7f7</item>
+    </style>
+
+    <style name="TextView.Bold" parent="Theme.Nomad">
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.Secondary" parent="Theme.Nomad">
+        <item name="android:textColor">@color/secondary_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.Additional" parent="Theme.Nomad">
+        <item name="android:textColor">@color/additional_info</item>
+    </style>
+
 </resources>

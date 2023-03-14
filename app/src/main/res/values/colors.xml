@@ -9,6 +9,22 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+<!--    Light theme colors -->
+    <color name="primary_text_color">#101652</color>
+    <color name="secondary_text_color">#0e1132</color>
+    <color name="additional_info">#9E9FA4</color>
+    <color name="on_card_text">#9E9FA4</color>
+    <color name="ic_selected">#2429A1</color>
+    <color name="ic_not_selected">#D5D6DA</color>
+    <color name="shape_bg">#FFFFFF</color>
+
+
+    <!--    Dark theme colors -->
+    <color name="primary_text_color_dark">#F4F4F4</color>
+    <color name="secondary_text_color_dark">#7C7C7C</color>
+    <color name="additional_info_dark">#5f5f61</color>
+    <color name="shape_bg_dark">#161618</color>
+
 <!--    App color palette-->
     <color name="light_white">#D2D2D2</color>
     <color name="card_1">#D2D2D2</color>

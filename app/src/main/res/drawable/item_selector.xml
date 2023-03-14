@@ -3,10 +3,10 @@
 
     <item
         android:state_pressed="true"
-        android:color="@color/black"/>
+        android:color="@color/ic_selected"/>
     <item
         android:state_checked="true"
-        android:color="@color/black"/>
+        android:color="@color/ic_selected"/>
     <item
         android:color="@color/light_white"/>
 
