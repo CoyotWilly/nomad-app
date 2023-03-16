@@ -24,13 +24,11 @@ class PersonFragment : Fragment(){
         if (arguments?.getBoolean("wasSuccessful") == false){
             biometricAuth()
         }
-        System.err.println("onCreate")
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        System.err.println("onCreate View")
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
 
