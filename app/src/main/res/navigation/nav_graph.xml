@@ -8,11 +8,36 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.coyotwilly.nomad.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
     </fragment>
+
+    <fragment android:id="@+id/person_fragment"
+        android:name="com.coyotwilly.nomad.PersonFragment"
+        android:label="PersonFragment"
+        tools:layout="@layout/fragment_person">
+
+        <action
+            android:id="@+id/action_person_fragment_to_pin_fragment"
+            app:destination="@id/pin_fragment" />
+        <action
+            android:id="@+id/action_person_fragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+
+    <fragment android:id="@+id/pin_fragment"
+        android:name="com.coyotwilly.nomad.PersonFragment"
+        android:label="PinAuthPage"
+        tools:layout="@layout/fragment_pin_auth">
+
+        <action
+            android:id="@+id/action_pin_fragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+
     <fragment
         android:id="@+id/likeFragment"
         android:name="com.coyotwilly.nomad.LikeFragment"
