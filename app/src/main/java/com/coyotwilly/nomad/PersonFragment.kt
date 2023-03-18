@@ -1,6 +1,7 @@
 package com.coyotwilly.nomad
 
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.PromptInfo
+import androidx.collection.arraySetOf
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -23,6 +25,7 @@ import androidx.fragment.app.Fragment
  * create an instance of this fragment.
  */
 class PersonFragment : Fragment(){
+    private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments?.getBoolean("wasSuccessful") == false){
@@ -36,29 +39,26 @@ class PersonFragment : Fragment(){
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
 
-    private fun pinAuth(view: View){
-        var pin: String = ""
-
-        // full PIN clear timer
-        val timer = object: CountDownTimer(200,1){
-            override fun onTick(millisUntilFinished: Long) { }
-
-            override fun onFinish() {
-                view.findViewById<EditText>(R.id.pin_no_1).text.clear()
-                view.findViewById<EditText>(R.id.pin_no_2).text.clear()
-                view.findViewById<EditText>(R.id.pin_no_3).text.clear()
-                view.findViewById<EditText>(R.id.pin_no_4).text.clear()
-                pin = ""
-                view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO) and (arguments?.getInt("currentLayout") == R.layout.fragment_person)){
+            val availableViews: Set<Int> = arraySetOf(R.id.login_details_box, R.id.email_details_box, R.id.name_details_box, R.id.birth_details_box, R.id.address_details_box, R.id.document_details_box, R.id.passport_details_box, R.id.danger_zone_details_box)
+            for (element in availableViews){
+                val navController = view.findViewById<View>(element)
+                ThemeWatcher(navController)
             }
+            themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         }
+    }
+
+    private fun pinAuth(view: View){
 
         // First PIN input box controller
         view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
         view.findViewById<EditText>(R.id.pin_no_1).doAfterTextChanged {
             view.findViewById<EditText>(R.id.pin_no_2).requestFocus()
         }
-        view.findViewById<EditText>(R.id.pin_no_2).setOnKeyListener { v, keyCode, event ->
+        view.findViewById<EditText>(R.id.pin_no_2).setOnKeyListener { _, keyCode, _ ->
             if ((keyCode == KeyEvent.KEYCODE_DEL) and (view.findViewById<EditText>(R.id.pin_no_2).text.toString().isEmpty())){
                 view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
             }
@@ -75,8 +75,6 @@ class PersonFragment : Fragment(){
         view.findViewById<EditText>(R.id.pin_no_4).setOnKeyListener { _, keyCode, _ ->
             if ((keyCode == KeyEvent.KEYCODE_DEL) and (view.findViewById<EditText>(R.id.pin_no_4).text.toString().isEmpty())){
                 view.findViewById<EditText>(R.id.pin_no_3).requestFocus()
-            }else if (keyCode == KeyEvent.KEYCODE_DEL){
-                timer.cancel()
             }
             return@setOnKeyListener false
         }
@@ -93,13 +91,25 @@ class PersonFragment : Fragment(){
 
         // Forth PIN input box controller
         view.findViewById<EditText>(R.id.pin_no_4).doAfterTextChanged {
+            var pin: String = view.findViewById<EditText>(R.id.pin_no_1).text.toString() + view.findViewById<EditText>(R.id.pin_no_2).text.toString() + view.findViewById<EditText>(R.id.pin_no_3).text.toString() + view.findViewById<EditText>(R.id.pin_no_4).text.toString()
             if (pin == "2222"){
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
                     .commit()
             } else {
-                pin = view.findViewById<EditText>(R.id.pin_no_1).text.toString() + view.findViewById<EditText>(R.id.pin_no_2).text.toString() + view.findViewById<EditText>(R.id.pin_no_3).text.toString() + view.findViewById<EditText>(R.id.pin_no_4).text.toString()
-                timer.start()
+                // full PIN clear timer
+                object: CountDownTimer(200,1){
+                    override fun onTick(millisUntilFinished: Long) { }
+
+                    override fun onFinish() {
+                        view.findViewById<EditText>(R.id.pin_no_1).text.clear()
+                        view.findViewById<EditText>(R.id.pin_no_2).text.clear()
+                        view.findViewById<EditText>(R.id.pin_no_3).text.clear()
+                        view.findViewById<EditText>(R.id.pin_no_4).text.clear()
+                        pin = ""
+                        view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
+                    }
+                }.start()
             }
         }
     }
