@@ -2,23 +2,27 @@ package com.coyotwilly.nomad
 
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.PromptInfo
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+
 /**
  * A simple [Fragment] subclass.
  * Use the [PersonFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class PersonFragment : Fragment(){
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments?.getBoolean("wasSuccessful") == false){
@@ -32,6 +36,73 @@ class PersonFragment : Fragment(){
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
 
+    private fun pinAuth(view: View){
+        var pin: String = ""
+
+        // full PIN clear timer
+        val timer = object: CountDownTimer(200,1){
+            override fun onTick(millisUntilFinished: Long) { }
+
+            override fun onFinish() {
+                view.findViewById<EditText>(R.id.pin_no_1).text.clear()
+                view.findViewById<EditText>(R.id.pin_no_2).text.clear()
+                view.findViewById<EditText>(R.id.pin_no_3).text.clear()
+                view.findViewById<EditText>(R.id.pin_no_4).text.clear()
+                pin = ""
+                view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
+            }
+        }
+
+        // First PIN input box controller
+        view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
+        view.findViewById<EditText>(R.id.pin_no_1).doAfterTextChanged {
+            view.findViewById<EditText>(R.id.pin_no_2).requestFocus()
+        }
+        view.findViewById<EditText>(R.id.pin_no_2).setOnKeyListener { v, keyCode, event ->
+            if ((keyCode == KeyEvent.KEYCODE_DEL) and (view.findViewById<EditText>(R.id.pin_no_2).text.toString().isEmpty())){
+                view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
+            }
+            return@setOnKeyListener false
+        }
+
+        view.findViewById<EditText>(R.id.pin_no_3).setOnKeyListener { _, keyCode, _ ->
+            if ((keyCode == KeyEvent.KEYCODE_DEL) and (view.findViewById<EditText>(R.id.pin_no_3).text.toString().isEmpty())){
+                view.findViewById<EditText>(R.id.pin_no_2).requestFocus()
+            }
+            return@setOnKeyListener false
+        }
+
+        view.findViewById<EditText>(R.id.pin_no_4).setOnKeyListener { _, keyCode, _ ->
+            if ((keyCode == KeyEvent.KEYCODE_DEL) and (view.findViewById<EditText>(R.id.pin_no_4).text.toString().isEmpty())){
+                view.findViewById<EditText>(R.id.pin_no_3).requestFocus()
+            }else if (keyCode == KeyEvent.KEYCODE_DEL){
+                timer.cancel()
+            }
+            return@setOnKeyListener false
+        }
+
+        // Second PIN input box controller
+        view.findViewById<EditText>(R.id.pin_no_2).doAfterTextChanged {
+            view.findViewById<EditText>(R.id.pin_no_3).requestFocus()
+        }
+
+        // Third PIN input box controller
+        view.findViewById<EditText>(R.id.pin_no_3).doAfterTextChanged {
+            view.findViewById<EditText>(R.id.pin_no_4).requestFocus()
+        }
+
+        // Forth PIN input box controller
+        view.findViewById<EditText>(R.id.pin_no_4).doAfterTextChanged {
+            if (pin == "2222"){
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
+                    .commit()
+            } else {
+                pin = view.findViewById<EditText>(R.id.pin_no_1).text.toString() + view.findViewById<EditText>(R.id.pin_no_2).text.toString() + view.findViewById<EditText>(R.id.pin_no_3).text.toString() + view.findViewById<EditText>(R.id.pin_no_4).text.toString()
+                timer.start()
+            }
+        }
+    }
     private fun biometricAuth() {
         val biometricManager = BiometricManager.from(requireContext())
         when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)){
@@ -48,12 +119,14 @@ class PersonFragment : Fragment(){
                 override fun onAuthenticationError(errorCode: Int,
                                                    errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-                    Toast.makeText(context,
-                        "Authentication error: $errString", Toast.LENGTH_SHORT)
-                        .show()
-
+                    if (errorCode == BiometricPrompt.ERROR_USER_CANCELED){
+                        pinAuth(requireView())
+                    } else {
+                        Toast.makeText(context,
+                            "Authentication error: $errString", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-
                 override fun onAuthenticationSucceeded(
                     result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
@@ -61,14 +134,12 @@ class PersonFragment : Fragment(){
                         .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
                         .commit()
                 }
-
                 override fun onAuthenticationFailed(){
                     super.onAuthenticationFailed()
                     Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT)
                         .show()
                 }
             })
-
         val promptInfo = PromptInfo.Builder()
             .setTitle("Verify your identity")
             .setDescription("Use your fingerprint to verify your identity.")
