@@ -15,9 +15,12 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.PromptInfo
 import androidx.collection.arraySetOf
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import java.net.URL
+import kotlin.concurrent.thread
 
 /**
  * A simple [Fragment] subclass.
@@ -26,6 +29,7 @@ import androidx.fragment.app.Fragment
  */
 class PersonFragment : Fragment(){
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments?.getBoolean("wasSuccessful") == false){
@@ -36,6 +40,9 @@ class PersonFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        if ((arguments?.getInt("currentLayout") == R.layout.fragment_person)){
+            parseJson()
+        }
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
 
@@ -44,15 +51,24 @@ class PersonFragment : Fragment(){
         if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO) and (arguments?.getInt("currentLayout") == R.layout.fragment_person)){
             val availableViews: Set<Int> = arraySetOf(R.id.login_details_box, R.id.email_details_box, R.id.name_details_box, R.id.birth_details_box, R.id.address_details_box, R.id.document_details_box, R.id.passport_details_box, R.id.danger_zone_details_box)
             for (element in availableViews){
-                val navController = view.findViewById<View>(element)
+                val navController = view.findViewById<ConstraintLayout>(element)
                 ThemeWatcher(navController)
             }
             themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         }
     }
-
+    private fun parseJson() {
+        thread {
+            val json = try {
+                URL("http://localhost:8080/api/user/1").readText()
+            } catch (e: Exception){
+                println("JSON Parsing failed")
+                return@thread
+            }
+            println(json)
+        }
+    }
     private fun pinAuth(view: View){
-
         // First PIN input box controller
         view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
         view.findViewById<EditText>(R.id.pin_no_1).doAfterTextChanged {
