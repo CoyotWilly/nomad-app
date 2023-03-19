@@ -5,6 +5,20 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
+    <activity
+        android:id="@+id/login_activity"
+        android:name="com.coyotwilly.nomad.LoginActivity"
+        tools:layout="@layout/activity_login"
+        tools:label="Login">
+    </activity>
+
+    <activity
+        android:id="@+id/sign_in_activity"
+        android:name="com.coyotwilly.nomad.SignInActivity"
+        tools:layout="@layout/activity_sign_in"
+        tools:label="SignIn">
+    </activity>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.coyotwilly.nomad.HomeFragment"

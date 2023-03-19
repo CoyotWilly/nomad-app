@@ -18,6 +18,7 @@
     <color name="ic_selected">#2429A1</color>
     <color name="ic_not_selected">#D5D6DA</color>
     <color name="shape_bg">#FFFFFF</color>
+    <color name="shape_button_bg">#0B69EB</color>
 
 
     <!--    Dark theme colors -->
@@ -25,6 +26,7 @@
     <color name="secondary_text_color_dark">#9B9A9A</color>
     <color name="additional_info_dark">#5f5f61</color>
     <color name="shape_bg_dark">#161618</color>
+    <color name="shape_button_bg_dark">#0DF5E3</color>
 
 <!--    App color palette-->
     <color name="light_white">#D2D2D2</color>

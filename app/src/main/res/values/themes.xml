@@ -23,6 +23,11 @@
         <item name="android:background">#f7f7f7</item>
     </style>
 
+    <style name="Button.Background" parent="Theme.Nomad">
+        <item name="android:background">#201A30</item>
+        <item name="android:textColor">@color/light_white</item>
+    </style>
+
     <style name="TextView.Bold" parent="Theme.Nomad">
         <item name="android:textColor">@color/primary_text_color</item>
         <item name="android:textStyle">bold</item>
@@ -35,6 +40,10 @@
 
     <style name="TextView.Additional" parent="Theme.Nomad">
         <item name="android:textColor">@color/additional_info</item>
+    </style>
+
+    <style name="EditText.Hint" parent="Theme.Nomad">
+        <item name="android:textColorHint">@color/additional_info</item>
     </style>
 
 </resources>
