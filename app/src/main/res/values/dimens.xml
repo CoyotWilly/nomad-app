@@ -10,4 +10,10 @@
     <dimen name="login_padding">16dp</dimen>
     <dimen name="login_text_size">32sp</dimen>
     <dimen name="login_drawable_padding">8dp</dimen>
+
+<!--    SIGN IN FORM DIMENS-->
+    <dimen name="sign_in_start_margin">32dp</dimen>
+    <dimen name="sign_in_top_margin">12dp</dimen>
+    <dimen name="sign_in_between_margin">8dp</dimen>
+
 </resources>
