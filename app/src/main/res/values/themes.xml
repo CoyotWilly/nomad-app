@@ -44,6 +44,7 @@
 
     <style name="EditText.Hint" parent="Theme.Nomad">
         <item name="android:textColorHint">@color/additional_info</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
     </style>
 
 </resources>
