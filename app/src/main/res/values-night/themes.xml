@@ -47,4 +47,11 @@
         <item name="android:textColorHint">@color/additional_info_dark</item>
         <item name="android:textColor">@color/secondary_text_color_dark</item>
     </style>
+
+    <style name="Button.Forms" parent="Theme.Nomad">
+        <item name="android:backgroundTint">@color/shape_bg_dark</item>
+        <item name="android:textColor">#BDB369</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

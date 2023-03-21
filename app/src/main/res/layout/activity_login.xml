@@ -103,22 +103,20 @@
             android:text="@string/home_text"
             android:textSize="24sp"
             android:textStyle="normal"
-            android:layout_marginTop="78dp"
+            android:layout_marginTop="102dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button"
-            style="@style/TextView.Secondary"
+            style="@style/Button.Forms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="78dp"
             android:layout_marginTop="@dimen/login_top_margin"
             android:background="@drawable/button_bg"
             android:text="Button"
-            android:textSize="22sp"
-            android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwd_login_form" />
