@@ -3,20 +3,31 @@ package com.coyotwilly.nomad
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.arraySetOf
 
 class LoginActivity : AppCompatActivity() {
     private val login: String = "username"
     private val password: String = "password"
-
+    private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO)){
+            val availableViews: Set<Int> = arraySetOf(R.id.email_login_form, R.id.passwd_login_form)
+            for (element in availableViews){
+                val navController = findViewById<EditText>(element)
+                ThemeWatcher(navController)
+            }
+            themeChanged = applicationContext.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        }
 
         val btLogin = findViewById<Button>(R.id.button)
 
