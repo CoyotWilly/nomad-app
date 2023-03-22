@@ -19,8 +19,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import java.net.URL
-import kotlin.concurrent.thread
 
 /**
  * A simple [Fragment] subclass.
@@ -40,9 +38,10 @@ class PersonFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if ((arguments?.getInt("currentLayout") == R.layout.fragment_person)){
-            parseJson()
-        }
+//        GET REQUEST FOR USER DATA
+//        if ((arguments?.getInt("currentLayout") == R.layout.fragment_person)){
+//            parseJson()
+//        }
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
 
@@ -55,17 +54,6 @@ class PersonFragment : Fragment(){
                 ThemeWatcher(navController)
             }
             themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        }
-    }
-    private fun parseJson() {
-        thread {
-            val json = try {
-                URL("http://localhost:8080/api/user/1").readText()
-            } catch (e: Exception){
-                println("JSON Parsing failed")
-                return@thread
-            }
-            println(json)
         }
     }
     private fun pinAuth(view: View){
