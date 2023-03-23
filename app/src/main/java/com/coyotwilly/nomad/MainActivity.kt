@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_like -> fragment = LikeFragment()
                 R.id.nav_search -> fragment = SearchFragment()
                 R.id.nav_shop -> fragment = ShopFragment()
-                R.id.nav_person -> fragment = PersonFragment.newInstance(R.layout.fragment_pin_auth, false)
+                R.id.nav_person -> fragment = PersonFragment.newInstance(R.layout.fragment_person, false)
+                // TODO:
+                //  -> REPLACE R.ID.FRAGMENT_PERSON WITH R.ID.PIN_AUTH_FRAGMENT FOR DEPLOYMENT
             }
             supportFragmentManager.beginTransaction().replace(R.id.body_container, fragment).commit()
             return@setNavigationItemSelectedListener true

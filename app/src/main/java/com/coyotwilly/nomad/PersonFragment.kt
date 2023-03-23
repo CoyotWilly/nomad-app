@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -19,6 +20,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import com.coyotwilly.nomad.service.User
+import com.coyotwilly.nomad.service.UserService
+import kotlinx.coroutines.*
 
 /**
  * A simple [Fragment] subclass.
@@ -27,7 +31,7 @@ import androidx.fragment.app.Fragment
  */
 class PersonFragment : Fragment(){
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
-
+    private var userData: User = User()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments?.getBoolean("wasSuccessful") == false){
@@ -39,9 +43,16 @@ class PersonFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 //        GET REQUEST FOR USER DATA
-//        if ((arguments?.getInt("currentLayout") == R.layout.fragment_person)){
-//            parseJson()
-//        }
+        if (arguments?.getInt("currentLayout") == R.layout.fragment_person){
+            runBlocking {
+                val job = launch {
+                    withTimeout(500L){
+                        userData = UserService.create().getUser()
+                    }
+                }
+                job.join()
+            }
+        }
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
 
@@ -55,7 +66,23 @@ class PersonFragment : Fragment(){
             }
             themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         }
+        if (arguments?.getInt("currentLayout") == R.layout.fragment_person){
+            if ((userData.id != 0L) and (userData.passportNo != "")) {
+                view.findViewById<TextView>(R.id.full_login).text = userData.login
+                view.findViewById<TextView>(R.id.email_data).text = userData.emailAddress
+                view.findViewById<TextView>(R.id.full_name).text = getString(R.string.full_name, userData.firstName, userData.lastName)
+                if (userData.apartmentNo == 0){
+                    view.findViewById<TextView>(R.id.address_data).text = getString(R.string.address_home, userData.street , userData.homeNo, userData.city, userData.country)
+                } else {
+                    view.findViewById<TextView>(R.id.address_data).text = getString(R.string.address_apart, userData.street , userData.homeNo, userData.apartmentNo, userData.city, userData.country)
+                }
+                view.findViewById<TextView>(R.id.passport_data).text = userData.passportNo
+                view.findViewById<TextView>(R.id.birth_data).text = userData.documentNo
+            }
+        }
+
     }
+
     private fun pinAuth(view: View){
         // First PIN input box controller
         view.findViewById<EditText>(R.id.pin_no_1).requestFocus()
