@@ -19,4 +19,7 @@
     <string name="enter_pin">Enter PIN</string>
     <string name="full_name">%1$s %2$s</string>
     <string name="conn_failed">Unable to receive data from server</string>
+    <string name="back_arrow">Previous screen icon arrow</string>
+    <string name="reset_password_hint">Please enter connected with your account email address into first box and NEW password to the next one</string>
+    <string name="password_reset_success">Password successful set ;)</string>
 </resources>

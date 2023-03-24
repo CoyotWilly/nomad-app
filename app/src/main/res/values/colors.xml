@@ -9,6 +9,7 @@
     <color name="red">#FF0000</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green_success">#BDB369</color>
 
 <!--    Light theme colors -->
     <color name="primary_text_color">#101652</color>
