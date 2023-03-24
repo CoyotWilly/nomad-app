@@ -1,14 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App general usage strings-->
     <string name="back_arrow">Previous screen icon arrow</string>
     <string name="submit">Submit</string>
     <string name="app_name">Nomad</string>
-
-    <!--    Pages names-->
     <string name="home_text">Home</string>
     <string name="like_text"><b>Like fragment</b>   During development</string>
     <string name="search_text"><b>Search fragment</b>   During development</string>
     <string name="shop_text"><b>Shop fragment</b>   During development</string>
+    <string name="person">Person</string>
     <string name="active">Active trips</string>
     <string name="past">Past</string>
     <string name="future">Future</string>
@@ -22,8 +21,6 @@
     <string name="new_mem_counter">%1$s new memory today</string>
     <string name="barcelona">Barcelona</string>
     <string name="singapore">Singapore</string>
-
-    <!-- Personal data labels -->
     <string name="address_apart">"%1$s %2$s/%3$d   %4$s   %5$s "</string>
     <string name="address_home">"%1$s %2$s   %3$s   %4$s "</string>
     <string name="enter_pin">Enter PIN</string>
@@ -38,20 +35,13 @@
     <string name="delete_account">Delete account</string>
     <string name="log_out">Log out</string>
     <string name="danger_zone">Danger zone</string>
-
-    <!-- Password reset content -->
     <string name="reset_password_hint">Please enter connected with your account email address into first box and NEW password to the next one</string>
     <string name="password_reset_success">Password successful set ;)</string>
     <string name="new_password">New password</string>
     <string name="password_reset">Password reset</string>
-
-    <!-- Login page specific text-->
     <string name="login">Login</string>
     <string name="please_log_in_to_continue">Please log in to continue</string>
-    <string name="sign_up">Don\'t have and account? <b>Sign up</b></string>
     <string name="password">Password</string>
-
-    <!-- Sign in form hints and headers -->
     <string name="join_us">Join us</string>
     <string name="account_information">Account information</string>
     <string name="last_name">Last name</string>
@@ -65,9 +55,7 @@
     <string name="house_number">House number</string>
     <string name="city">City</string>
     <string name="country">Country</string>
-
-    <!--  PIN authentication hints and labels-->
     <string name="pin_description">Pleas enter app pin to see your personal data</string>
     <string name="forget_password">Forget Password</string>
-    <string name="person">Person</string>
+    <string name="sign_up">Don\'t have and account? <b>Sign up</b></string>
 </resources>
