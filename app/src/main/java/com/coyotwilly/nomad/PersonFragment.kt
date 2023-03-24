@@ -22,7 +22,9 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.coyotwilly.nomad.service.User
 import com.coyotwilly.nomad.service.UserService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 
 /**
  * A simple [Fragment] subclass.
@@ -32,8 +34,10 @@ import kotlinx.coroutines.*
 class PersonFragment : Fragment(){
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
     private var userData: User = User()
+    private var userId = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userId = requireArguments().getLong("UserId")
         if (arguments?.getBoolean("wasSuccessful") == false){
             biometricAuth()
         }
@@ -47,7 +51,7 @@ class PersonFragment : Fragment(){
             runBlocking {
                 val job = launch {
                     withTimeout(500L){
-                        userData = UserService.create().getUser()
+                        userData = UserService.create().getUser(userId)
                     }
                 }
                 job.join()
@@ -125,7 +129,7 @@ class PersonFragment : Fragment(){
             var pin: String = view.findViewById<EditText>(R.id.pin_no_1).text.toString() + view.findViewById<EditText>(R.id.pin_no_2).text.toString() + view.findViewById<EditText>(R.id.pin_no_3).text.toString() + view.findViewById<EditText>(R.id.pin_no_4).text.toString()
             if (pin == "2222"){
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
+                    .replace(R.id.body_container, newInstance(R.layout.fragment_person,true, userId))
                     .commit()
             } else {
                 // full PIN clear timer
@@ -172,7 +176,7 @@ class PersonFragment : Fragment(){
                     result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.body_container, newInstance(R.layout.fragment_person,true))
+                        .replace(R.id.body_container, newInstance(R.layout.fragment_person,true, userId))
                         .commit()
                 }
                 override fun onAuthenticationFailed(){
@@ -195,14 +199,16 @@ class PersonFragment : Fragment(){
          *
          * @param id Layout view parameter.
          * @param wasSuccessful Was the previous object authenticated successfully.
+         * @param userId User ID given from activity, in most cases received from app server or using getSharedPreferences method.
          * @return A new instance of fragment PersonFragment.
          */
         @JvmStatic
-        fun newInstance(id: Int, wasSuccessful: Boolean) =
+        fun newInstance(id: Int, wasSuccessful: Boolean,userId: Long) =
             PersonFragment().apply {
                 arguments = Bundle().apply {
                     putInt("currentLayout", id)
                     putBoolean("wasSuccessful", wasSuccessful)
+                    putLong("UserId", userId)
                 }
             }
     }

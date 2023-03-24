@@ -1,5 +1,6 @@
 package com.coyotwilly.nomad
 
+import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -23,15 +24,17 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.body_container, HomeFragment()).commit()
         navigationView.setOnItemSelectedListener setNavigationItemSelectedListener@{ menuItem ->
             var fragment: Fragment = HomeFragment()
+            val userId = getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
             when (menuItem.itemId) {
                 R.id.nav_home -> fragment = HomeFragment()
                 R.id.nav_like -> fragment = LikeFragment()
                 R.id.nav_search -> fragment = SearchFragment()
                 R.id.nav_shop -> fragment = ShopFragment()
-                R.id.nav_person -> fragment = PersonFragment.newInstance(R.layout.fragment_person, false)
+                R.id.nav_person -> fragment = PersonFragment.newInstance(R.layout.fragment_person, false, userId)
                 // TODO:
                 //  -> REPLACE R.ID.FRAGMENT_PERSON WITH R.ID.PIN_AUTH_FRAGMENT FOR DEPLOYMENT
             }
+
             supportFragmentManager.beginTransaction().replace(R.id.body_container, fragment).commit()
             return@setNavigationItemSelectedListener true
         }

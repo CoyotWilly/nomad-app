@@ -38,6 +38,7 @@ class SignInActivity : AppCompatActivity() {
             var isPasswd = false
             var isDocumentNo = false
             var isPassportNo = false
+            var isEmail = false
             var isPin = false
             if (findViewById<EditText>(R.id.passport_no_in).text.toString().isBlank()){
                 findViewById<EditText>(R.id.passport_no_in).setBackgroundResource(R.drawable.background_danger_zone)
@@ -65,19 +66,28 @@ class SignInActivity : AppCompatActivity() {
             } else {
                 isPasswd = true
             }
-            if (isPasswd and isDocumentNo and isPin and isPassportNo){
-                var apartmentNo: Int = 0
+            if (findViewById<EditText>(R.id.email_in).text.toString().isBlank()){
+                findViewById<EditText>(R.id.email_in).setBackgroundResource(R.drawable.background_danger_zone)
+                ThemeWatcher(findViewById<EditText>(R.id.email_in))
+            } else {
+                isEmail = true
+            }
+
+            if (isPasswd and isDocumentNo and isPin and isPassportNo and isEmail){
+                var apartmentNo = 0
                 if (findViewById<EditText>(R.id.apartment_no_in).text.toString().isNotBlank()) {
                     apartmentNo = Integer.parseInt(findViewById<EditText>(R.id.apartment_no_in).text.toString())
                 }
                 runBlocking {
                     val job = launch {
-                        UserService.create().createUser(
+                        val request = UserService.create()
+                        request.createUser(
                             User(
                                 0,
                                 Integer.parseInt(findViewById<EditText>(R.id.app_pin_in).text.toString()),
                                 findViewById<EditText>(R.id.login_in).text.toString(),
                                 findViewById<EditText>(R.id.email_in).text.toString(),
+                                findViewById<EditText>(R.id.passwd_in).text.toString(),
                                 findViewById<EditText>(R.id.first_name_in).text.toString(),
                                 findViewById<EditText>(R.id.last_name_in).text.toString(),
                                 findViewById<EditText>(R.id.passport_no_in).text.toString(),
@@ -91,6 +101,8 @@ class SignInActivity : AppCompatActivity() {
                     }
                     job.join()
                 }
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
         }
     }

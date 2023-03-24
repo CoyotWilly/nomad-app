@@ -9,6 +9,7 @@ data class User(
     val pin: Int = 0,
     val login: String = "",
     val emailAddress: String = "",
+    val password: String = "",
     val firstName: String = "",
     val lastName: String = "",
     val passportNo: String = "",

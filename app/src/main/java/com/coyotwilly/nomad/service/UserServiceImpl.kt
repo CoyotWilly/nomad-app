@@ -10,10 +10,10 @@ import io.ktor.http.*
 class UserServiceImpl(
     private var client: HttpClient
 ) : UserService{
-    override suspend fun getUser(): User {
+    override suspend fun getUser(id: Long): User {
         return try {
             client.get{
-                url(HttpRoutes.GET_USER)
+                url(HttpRoutes.getUser(id))
             }.body()
         } catch (e: RedirectResponseException){
             Log.e("REQUEST_ERROR",e.response.status.description)
@@ -49,6 +49,72 @@ class UserServiceImpl(
         } catch (e: Exception) {
             Log.e("REQUEST_ERROR", e.message.toString())
             null
+        }
+    }
+
+    override suspend fun canLogin(user: LoginCredentials): Boolean {
+        return try {
+            client.post {
+                url(HttpRoutes.LOGIN_VERIFIER)
+                contentType(ContentType.Application.Json)
+                setBody(user)
+            }.body()
+        } catch (e: RedirectResponseException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            false
+        } catch (e: ClientRequestException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            false
+        } catch (e: ServerResponseException) {
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            false
+        } catch (e: Exception) {
+            Log.e("REQUEST_ERROR", e.message.toString())
+            false
+        }
+    }
+
+    override suspend fun idChecker(user: LoginCredentials): Long {
+        return try {
+            client.post {
+                url(HttpRoutes.ID_MATCHER)
+                contentType(ContentType.Application.Json)
+                setBody(user)
+            }.body()
+        } catch (e: RedirectResponseException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            0L
+        } catch (e: ClientRequestException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            0L
+        } catch (e: ServerResponseException) {
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            0L
+        } catch (e: Exception) {
+            Log.e("REQUEST_ERROR", e.message.toString())
+            0L
+        }
+    }
+
+    override suspend fun userPasswordReset(user: LoginCredentials): User {
+        return try {
+            client.post {
+                url(HttpRoutes.PASSWORD_RESET)
+                contentType(ContentType.Application.Json)
+                setBody(user)
+            }.body()
+        } catch (e: RedirectResponseException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            User()
+        } catch (e: ClientRequestException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            User()
+        } catch (e: ServerResponseException) {
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            User()
+        } catch (e: Exception) {
+            Log.e("REQUEST_ERROR", e.message.toString())
+            User()
         }
     }
 }

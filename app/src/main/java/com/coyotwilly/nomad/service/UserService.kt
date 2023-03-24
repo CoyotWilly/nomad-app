@@ -7,8 +7,12 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
 interface UserService {
-    suspend fun getUser(): User
+    suspend fun getUser(id: Long): User
     suspend fun createUser(user: User): User?
+    suspend fun canLogin(user: LoginCredentials): Boolean
+    suspend fun idChecker(user: LoginCredentials): Long
+    suspend fun userPasswordReset(user: LoginCredentials): User
+
     companion object {
         fun create(): UserService {
             return UserServiceImpl(

@@ -11,6 +11,10 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.arraySetOf
+import com.coyotwilly.nomad.service.LoginCredentials
+import com.coyotwilly.nomad.service.UserService
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class LoginActivity : AppCompatActivity() {
     private val login: String = "username"
@@ -64,8 +68,20 @@ class LoginActivity : AppCompatActivity() {
     private fun viewChangeHandler(pref: SharedPreferences) {
         val loginText: String = findViewById<EditText>(R.id.email_login_form).text.toString()
         val passwordText: String = findViewById<EditText>(R.id.passwd_login_form).text.toString()
+        var canLogin = false
+        var id = 0L
+        runBlocking {
+            val job = launch {
+                val service =  UserService.create()
+                val credentials = LoginCredentials(loginText, passwordText)
+                canLogin = service.canLogin(credentials)
+                id = service.idChecker(credentials)
+            }
+            job.join()
+        }
 
-        if ((loginText == "admin") and (passwordText == "1234")) {
+        if (canLogin) {
+            this.getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).edit().putLong("com.coyotwilly.app.user.Id", id).apply()
             pref.edit().putString(login, loginText)
                 .putString(password, passwordText)
                 .apply()
@@ -75,6 +91,8 @@ class LoginActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.email_login_form).text.clear()
             findViewById<EditText>(R.id.email_login_form).requestFocus()
             findViewById<EditText>(R.id.passwd_login_form).text.clear()
+//            val prefGetter = getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
+//            findViewById<TextView>(R.id.ask_to_sign_in).text = prefGetter.toString()
         }
     }
 }
