@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.arraySetOf
@@ -26,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO)){
             val availableViews: Set<Int> = arraySetOf(R.id.email_login_form, R.id.passwd_login_form)
+            ThemeWatcher(findViewById(R.id.destination_background_img)).imgBackground(findViewById(R.id.destination_background_img))
             for (element in availableViews){
                 val navController = findViewById<EditText>(element)
                 ThemeWatcher(navController)

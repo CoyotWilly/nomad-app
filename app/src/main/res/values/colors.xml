@@ -20,6 +20,7 @@
     <color name="ic_not_selected">#D5D6DA</color>
     <color name="shape_bg">#FFFFFF</color>
     <color name="shape_button_bg">#0B69EB</color>
+    <color name="login_ic_bg">#F7F7F7</color>
 
 
     <!--    Dark theme colors -->
