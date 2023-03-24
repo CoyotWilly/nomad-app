@@ -15,5 +15,7 @@
     <dimen name="sign_in_start_margin">32dp</dimen>
     <dimen name="sign_in_top_margin">12dp</dimen>
     <dimen name="sign_in_between_margin">8dp</dimen>
+    <dimen name="h2">36sp</dimen>
+    <dimen name="danger_zone_margins">21dp</dimen>
 
 </resources>

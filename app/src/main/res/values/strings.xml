@@ -1,25 +1,72 @@
 <resources>
+    <!-- App general usage strings-->
+    <string name="back_arrow">Previous screen icon arrow</string>
+    <string name="submit">Submit</string>
     <string name="app_name">Nomad</string>
 
     <!--    Pages names-->
     <string name="home_text">Home</string>
-    <string name="like_text">Like</string>
-    <string name="search_text">Search</string>
-    <string name="shop_text">Shop</string>
-    <string name="active">Active</string>
+    <string name="like_text"><b>Like fragment</b> \n During development</string>
+    <string name="search_text"><b>Search fragment</b> \n During development</string>
+    <string name="shop_text"><b>Shop fragment</b> \n During development</string>
+    <string name="person">Person</string>
+    <string name="active">Active trips</string>
+    <string name="past">Past</string>
+    <string name="future">Future</string>
+    <string name="trip_counter">%1$d trip</string>
+    <string name="trips_counter">%1$d trips</string>
     <string name="destination_img">Destination place background image</string>
-    <string name="date_example">15 june - 28 june 2022</string>
+    <string name="date_example">%1$d %2%s - %3$d %4$s %5$d</string>
     <string name="new_trip_creator">new trip creator icon</string>
+    <string name="community_memories">Community memories</string>
+    <string name="new_memories_counter">%1$s new memories today</string>
+    <string name="new_mem_counter">%1$s new memory today</string>
     <string name="barcelona">Barcelona</string>
     <string name="singapore">Singapore</string>
 
-    <string name="person">Person</string>
+    <!-- Personal data labels -->
     <string name="address_apart">%1$s %2$s/%3$d \n %4$s \n %5$s </string>
     <string name="address_home">%1$s %2$s \n %3$s \n %4$s </string>
     <string name="enter_pin">Enter PIN</string>
     <string name="full_name">%1$s %2$s</string>
     <string name="conn_failed">Unable to receive data from server</string>
-    <string name="back_arrow">Previous screen icon arrow</string>
+    <string name="email">Email</string>
+    <string name="id_number">ID number</string>
+    <string name="full_name_category">Full name</string>
+    <string name="personal_information">Personal information</string>
+    <string name="address">Address</string>
+    <string name="passport_number">Passport number</string>
+    <string name="delete_account">Delete account</string>
+    <string name="log_out">Log out</string>
+    <string name="danger_zone">Danger zone</string>
+
+    <!-- Password reset content -->
     <string name="reset_password_hint">Please enter connected with your account email address into first box and NEW password to the next one</string>
     <string name="password_reset_success">Password successful set ;)</string>
+    <string name="new_password">New password</string>
+    <string name="password_reset">Password reset</string>
+
+    <!-- Login page specific text-->
+    <string name="login">Login</string>
+    <string name="please_log_in_to_continue">Please log in to continue</string>
+    <string name="password">Password</string>
+
+    <!-- Sign in form hints and headers -->
+    <string name="join_us">Join us</string>
+    <string name="account_information">Account information</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="security_and_backup">Security and backup</string>
+    <string name="pin">PIN</string>
+    <string name="documents">Documents</string>
+    <string name="street">Street</string>
+    <string name="apartment_number">Apartment</string>
+    <string name="house_number">House number</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+
+    <!--  PIN authentication hints and labels-->
+    <string name="pin_description">Pleas enter app pin to see your personal data</string>
+    <string name="forget_password">Forget Password</string>
 </resources>

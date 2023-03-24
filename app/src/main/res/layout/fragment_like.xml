@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/like_text"
+        android:textAlignment="center"
         android:textSize="30sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textColor="@color/black" />
+
 
 </FrameLayout>

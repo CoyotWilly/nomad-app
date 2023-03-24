@@ -25,9 +25,11 @@
         android:id="@+id/data_protection_string"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="@string/enter_pin"
+        android:text="@string/pin_description"
         android:textSize="24sp"
+        android:textAlignment="center"
         style="@style/TextView.Secondary"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/pin_no_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,18 +96,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/pin_no_3"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pinReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/home_text"
-        android:textSize="24sp"
-        style="@style/TextView.Secondary"
-        android:textStyle="normal"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
