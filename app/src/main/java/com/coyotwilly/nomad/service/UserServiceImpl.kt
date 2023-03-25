@@ -117,4 +117,24 @@ class UserServiceImpl(
             User()
         }
     }
+
+    override suspend fun deleteUserAccount(id: Long): String {
+        return try {
+            client.delete {
+                url(HttpRoutes.getUser(id))
+            }.body()
+        } catch (e: RedirectResponseException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            "DELETE USER ERROR"
+        } catch (e: ClientRequestException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            "DELETE USER ERROR"
+        } catch (e: ServerResponseException) {
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            "DELETE USER ERROR"
+        } catch (e: Exception) {
+            Log.e("REQUEST_ERROR", e.message.toString())
+            "DELETE USER ERROR"
+        }
+    }
 }

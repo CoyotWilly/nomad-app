@@ -12,6 +12,7 @@ interface UserService {
     suspend fun canLogin(user: LoginCredentials): Boolean
     suspend fun idChecker(user: LoginCredentials): Long
     suspend fun userPasswordReset(user: LoginCredentials): User
+    suspend fun deleteUserAccount(id: Long): String
 
     companion object {
         fun create(): UserService {

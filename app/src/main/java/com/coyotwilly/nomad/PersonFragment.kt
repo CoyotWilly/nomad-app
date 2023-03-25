@@ -1,6 +1,7 @@
 package com.coyotwilly.nomad
 
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,6 +10,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -82,6 +84,20 @@ class PersonFragment : Fragment(){
                 }
                 view.findViewById<TextView>(R.id.passport_data).text = userData.passportNo
                 view.findViewById<TextView>(R.id.birth_data).text = userData.documentNo
+            }
+            view.findViewById<Button>(R.id.log_out_bt).setOnClickListener {
+                startActivity(Intent(this.context, LoginActivity::class.java))
+            }
+            view.findViewById<Button>(R.id.account_delete_bt).setOnClickListener {
+                runBlocking {
+                    var resp = ""
+                    val job = launch {
+                        resp = UserService.create().deleteUserAccount(userId)
+                    }
+                    job.join()
+                    Toast.makeText(context, resp, Toast.LENGTH_SHORT)
+                }
+                startActivity(Intent(this.context, LoginActivity::class.java))
             }
         }
 

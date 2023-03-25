@@ -10,5 +10,4 @@ object HttpRoutes {
     fun getUser(id: Long): String{
         return "$BASE_URL/user/$id"
     }
-
 }
