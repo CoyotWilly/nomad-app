@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.arraySetOf
@@ -18,8 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class LoginActivity : AppCompatActivity() {
-    private val login: String = "username"
-    private val password: String = "password"
+    private val login: String = "com.coyotwilly.app.user.Username"
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         val btLogin = findViewById<Button>(R.id.button)
 
-        val pref: SharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val pref: SharedPreferences = getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE)
 
         if (pref.contains(login)){
             startActivity(Intent(this, MainActivity::class.java))
@@ -83,9 +81,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if (canLogin) {
-            this.getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).edit().putLong("com.coyotwilly.app.user.Id", id).apply()
-            pref.edit().putString(login, loginText)
-                .putString(password, passwordText)
+            pref.edit()
+                .putString(login, loginText)
+                .putString("com.coyotwilly.app.user.Password", passwordText)
+                .putLong("com.coyotwilly.app.user.Id", id)
                 .apply()
             startActivity(Intent(this, MainActivity::class.java))
             finish()

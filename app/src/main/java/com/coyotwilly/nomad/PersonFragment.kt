@@ -1,6 +1,7 @@
 package com.coyotwilly.nomad
 
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -86,6 +87,10 @@ class PersonFragment : Fragment(){
                 view.findViewById<TextView>(R.id.birth_data).text = userData.documentNo
             }
             view.findViewById<Button>(R.id.log_out_bt).setOnClickListener {
+                this.requireContext().applicationContext.getSharedPreferences("com.coyotwilly.app", Context.MODE_PRIVATE).edit()
+                    .remove("com.coyotwilly.app.user.Username")
+                    .remove("com.coyotwilly.app.user.Id")
+                    .apply()
                 startActivity(Intent(this.context, LoginActivity::class.java))
             }
             view.findViewById<Button>(R.id.account_delete_bt).setOnClickListener {
