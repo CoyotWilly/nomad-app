@@ -25,6 +25,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.coyotwilly.nomad.service.User
 import com.coyotwilly.nomad.service.UserService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
@@ -50,15 +51,13 @@ class PersonFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 //        GET REQUEST FOR USER DATA
-        if (arguments?.getInt("currentLayout") == R.layout.fragment_person){
-            runBlocking {
-                val job = launch {
-                    withTimeout(500L){
-                        userData = UserService.create().getUser(userId)
-                    }
+        runBlocking {
+            val job = launch(Dispatchers.Default) {
+                withTimeout(500L){
+                    userData = UserService.create().getUser(userId)
                 }
-                job.join()
             }
+            job.join()
         }
         return inflater.inflate(arguments?.getInt("currentLayout") ?: R.layout.fragment_pin_auth, container, false)
     }
@@ -148,7 +147,7 @@ class PersonFragment : Fragment(){
         // Forth PIN input box controller
         view.findViewById<EditText>(R.id.pin_no_4).doAfterTextChanged {
             var pin: String = view.findViewById<EditText>(R.id.pin_no_1).text.toString() + view.findViewById<EditText>(R.id.pin_no_2).text.toString() + view.findViewById<EditText>(R.id.pin_no_3).text.toString() + view.findViewById<EditText>(R.id.pin_no_4).text.toString()
-            if (pin == "2222"){
+            if (pin == userData.pin.toString()){
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.body_container, newInstance(R.layout.fragment_person,true, userId))
                     .commit()
