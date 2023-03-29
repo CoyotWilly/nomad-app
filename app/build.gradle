@@ -48,14 +48,19 @@ dependencies {
     // finger print library
     implementation 'androidx.biometric:biometric-ktx:1.2.0-alpha05'
 
-    // HTTP request handler library
+    // HTTP requests handler libraries
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'
     implementation 'io.ktor:ktor-client-core:2.2.4'
     implementation 'io.ktor:ktor-client-cio:2.2.4'
     implementation 'io.ktor:ktor-client-okhttp:2.2.4'
     implementation 'io.ktor:ktor-client-android:2.2.4'
-
     implementation 'io.ktor:ktor-client-content-negotiation:2.2.4'
     implementation 'io.ktor:ktor-serialization-kotlinx-json:2.2.4'
+
+    // camera and gallery pictures picking library - COIL
+    implementation("io.coil-kt:coil-compose:2.3.0")
+
+    // USER PERMISSIONS
+    implementation 'com.karumi:dexter:6.2.3'
 
 }
