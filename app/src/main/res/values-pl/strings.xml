@@ -58,4 +58,12 @@
     <string name="pin_description">Podaj PIN by zobaczyć swoje dane osobiste</string>
     <string name="forget_password">Zapomniałem hasła</string>
     <string name="sign_up">Nie masz konta> <b>Zarejestruj się</b></string>
+    <string name="destination_place">Cel wycieczki</string>
+    <string name="save">Zapisz</string>
+    <string name="trip_end_date">Data końca wycieczki</string>
+    <string name="trip_start_date">Data rozpoczęcia wycieczki</string>
+    <string name="travel_information">Gdzie? Kiedy?</string>
+    <string name="background_image">Tło wycieczki</string>
+    <string name="trip_configure">Creator podróży</string>
+    <string name="date_template">%1$d-%2$s-%3$s</string>
 </resources>

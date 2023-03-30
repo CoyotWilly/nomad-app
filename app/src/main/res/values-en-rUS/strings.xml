@@ -58,4 +58,12 @@
     <string name="pin_description">Pleas enter app pin to see your personal data</string>
     <string name="forget_password">Forget Password</string>
     <string name="sign_up">Don\'t have and account? <b>Sign up</b></string>
+    <string name="destination_place">Destination place</string>
+    <string name="save">Save</string>
+    <string name="trip_end_date">Trip end date</string>
+    <string name="trip_start_date">Trip start date</string>
+    <string name="travel_information">Travel information</string>
+    <string name="background_image">Background image</string>
+    <string name="trip_configure">Trip configure</string>
+    <string name="date_template">%1$d-%2$s-%3$s</string>
 </resources>
