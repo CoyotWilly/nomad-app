@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.biometric.BiometricPrompt.PromptInfo
@@ -65,10 +66,15 @@ class PersonFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO) and (arguments?.getInt("currentLayout") == R.layout.fragment_person)){
-            val availableViews: Set<Int> = arraySetOf(R.id.login_details_box, R.id.email_details_box, R.id.name_details_box, R.id.birth_details_box, R.id.address_details_box, R.id.document_details_box, R.id.passport_details_box, R.id.danger_zone_details_box)
+            var availableViews: Set<Int> = arraySetOf(R.id.login_details_box, R.id.email_details_box, R.id.name_details_box, R.id.birth_details_box, R.id.address_details_box, R.id.document_details_box, R.id.passport_details_box, R.id.danger_zone_details_box)
             for (element in availableViews){
                 val navController = view.findViewById<ConstraintLayout>(element)
                 ThemeWatcher(navController)
+            }
+            availableViews = arraySetOf(R.id.log_out_bt, R.id.account_delete_bt)
+            for (ele in availableViews) {
+                val navController = view.findViewById<AppCompatButton>(ele)
+                ThemeWatcher(navController).imgBackground(navController)
             }
             themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         }

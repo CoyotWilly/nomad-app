@@ -333,7 +333,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="@dimen/danger_zone_margins"
-            android:paddingBottom="@dimen/danger_zone_margins"
             android:background="@drawable/background_danger_zone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -380,6 +379,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/log_out_bt" />
+
+            <LinearLayout
+                android:id="@+id/danger_zone_fake_box"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/account_delete_bt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
