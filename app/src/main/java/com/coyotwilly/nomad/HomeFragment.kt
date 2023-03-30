@@ -1,10 +1,12 @@
 package com.coyotwilly.nomad
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.collection.arraySetOf
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -49,6 +51,10 @@ class HomeFragment : Fragment() {
                 ThemeWatcher(navController)
             }
             themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        }
+
+        view.findViewById<ImageButton>(R.id.edit_pen).setOnClickListener {
+            startActivity(Intent(this.context, FutureTripCreate::class.java))
         }
     }
     companion object {

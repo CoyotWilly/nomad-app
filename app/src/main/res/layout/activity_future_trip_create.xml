@@ -18,24 +18,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/camera_bnt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/gallery_bnt" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/gallery_bnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="gallery"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/camera_bnt"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/background_preview_future" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
