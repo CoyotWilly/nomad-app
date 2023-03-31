@@ -1,21 +1,29 @@
 package com.coyotwilly.nomad
 
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.collection.arraySetOf
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import com.coyotwilly.nomad.model.FutureTrips
+import com.coyotwilly.nomad.service.UserService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.util.*
 
@@ -55,7 +63,23 @@ class FutureTripCreate : AppCompatActivity() {
                 datePickerDialog(R.id.trip_end_date)
             }
         }
+        findViewById<ImageButton>(R.id.back_arrow_to_home).setOnClickListener {
+            startActivity(Intent(this.applicationContext, MainActivity::class.java))
+            finish()
+        }
 
+        findViewById<AppCompatButton>(R.id.save_future_trip).setOnClickListener {
+            val userId = getSharedPreferences("com.coyotwilly.app", Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
+            val trip = FutureTrips(0, "2024-02-19", "2024-02-29", "Mount Blanc", null)
+            runBlocking {
+                val job = launch {
+                    val service = UserService.create()
+//                    service.postImg(userId, File(imgUri.toString()))
+                    service.postFutureTrip(userId, trip)
+                }
+                job.join()
+            }
+        }
     }
 
     private fun datePickerDialog(element: Int) {

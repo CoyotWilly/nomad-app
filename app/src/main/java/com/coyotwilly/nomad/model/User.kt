@@ -1,4 +1,4 @@
-package com.coyotwilly.nomad.service
+package com.coyotwilly.nomad.model
 
 import kotlinx.serialization.SerialName
 

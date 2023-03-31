@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             var fragment: Fragment = HomeFragment()
             val userId = getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
             when (menuItem.itemId) {
-                R.id.nav_home -> fragment = HomeFragment()
+                R.id.nav_home -> fragment = HomeFragment.newInstance(userId)
                 R.id.nav_like -> fragment = LikeFragment()
                 R.id.nav_search -> fragment = SearchFragment()
                 R.id.nav_shop -> fragment = ShopFragment()

@@ -10,7 +10,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.coyotwilly.nomad.service.LoginCredentials
+import com.coyotwilly.nomad.model.LoginCredentials
 import com.coyotwilly.nomad.service.UserService
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

@@ -10,4 +10,19 @@ object HttpRoutes {
     fun getUser(id: Long): String{
         return "$BASE_URL/user/$id"
     }
+    fun getFutureTrips(id: Long): String {
+        return "$BASE_URL/user/$id/get-all-trips"
+    }
+    fun getActiveTrips(id: Long): String {
+        return "$BASE_URL/user/$id/get-all-active-trips"
+    }
+    fun getPastTrips(id: Long): String {
+        return "$BASE_URL/user/$id/get-all-past-trips"
+    }
+    fun postNewImg(id: Long): String {
+        return "$BASE_URL/img/add/$id"
+    }
+    fun postNewTrip(id: Long): String {
+        return "$BASE_URL/user/$id/add-trip"
+    }
 }

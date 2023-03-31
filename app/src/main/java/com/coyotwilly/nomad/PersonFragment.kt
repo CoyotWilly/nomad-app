@@ -24,7 +24,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import com.coyotwilly.nomad.service.User
+import com.coyotwilly.nomad.model.User
 import com.coyotwilly.nomad.service.UserService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
