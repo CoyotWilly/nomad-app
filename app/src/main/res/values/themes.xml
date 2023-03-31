@@ -53,4 +53,12 @@
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">normal</item>
     </style>
+
+    <style name="ImageButton.Themed" parent="Theme.Nomad">
+        <item name="android:src">@drawable/ic_edit</item>
+    </style>
+
+    <style name="ImageButton.Back.Themed" parent="Theme.Nomad">
+        <item name="android:src">@drawable/ic_back</item>
+    </style>
 </resources>

@@ -27,6 +27,12 @@
         <action
             android:id="@+id/action_homeFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_futureTripCreate2"
+            app:destination="@id/futureTripCreate" />
+        <action
+            android:id="@+id/action_homeFragment_to_futureTripCreate3"
+            app:destination="@id/futureTripCreate" />
     </fragment>
 
     <fragment android:id="@+id/person_fragment"
@@ -84,4 +90,14 @@
             android:id="@+id/action_shopFragment_to_mainActivity2"
             app:destination="@id/mainActivity" />
     </fragment>
+    <activity
+        android:id="@+id/futureTripCreate"
+        android:name="com.coyotwilly.nomad.FutureTripCreate"
+        android:label="activity_future_trip_create"
+        tools:layout="@layout/activity_future_trip_create" />
+    <activity
+        android:id="@+id/forgetPasswordActivity"
+        android:name="com.coyotwilly.nomad.ForgetPasswordActivity"
+        android:label="activity_forget_password"
+        tools:layout="@layout/activity_forget_password" />
 </navigation>

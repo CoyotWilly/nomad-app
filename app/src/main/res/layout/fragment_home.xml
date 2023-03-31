@@ -20,7 +20,8 @@
             android:layout_marginBottom="5dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/new_trip_creator"
-            android:src="@drawable/ic_edit_black"
+            android:scaleType="fitXY"
+            style="@style/ImageButton.Themed"
             app:layout_constraintBottom_toBottomOf="@+id/homeTitle"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -103,7 +104,7 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="35dp"
-                    android:text="@string/home_text"
+                    android:text="@string/destination_place"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
