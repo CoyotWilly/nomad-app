@@ -1,32 +1,26 @@
 package com.coyotwilly.nomad
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.collection.arraySetOf
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import com.coyotwilly.nomad.model.ActiveTrips
 import com.coyotwilly.nomad.model.FutureTrips
 import com.coyotwilly.nomad.model.PastTrips
 import com.coyotwilly.nomad.service.UserService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.math.min
 
 /**
  * A simple [Fragment] subclass.
@@ -35,7 +29,9 @@ import kotlin.math.min
  */
 class HomeFragment : Fragment() {
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
-    private val MIN_SWIPE_DISTANCE = 550
+    private var destinationList = mutableListOf<String>()
+    private var travelPeriodList = mutableListOf<String>()
+    private var backgroundImgList = mutableListOf<Bitmap>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,55 +44,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchView()
-        if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO)){
+
+        if ((themeChanged != Configuration.UI_MODE_NIGHT_YES) or (themeChanged != Configuration.UI_MODE_NIGHT_NO)) {
             val availableViews: Set<Int> = arraySetOf(R.id.active_bg, R.id.past_bg, R.id.community_bg)
-            for (element in availableViews){
-                val navController = view.findViewById<ConstraintLayout>(element)
-                ThemeWatcher(navController)
+            for (element in availableViews) {
+                val paintedElement = view.findViewById<ConstraintLayout>(element)
+                ThemeWatcher(paintedElement)
             }
             themeChanged = view.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         }
-        val activeCards = view.findViewById<View>(R.id.active_trip)
-        view.findViewById<ImageButton>(R.id.edit_pen).setOnClickListener {
-            startActivity(Intent(this.context, FutureTripCreate::class.java))
-        }
-        activeCards.setOnTouchListener { v, event ->
-            val displayMetrics = resources.displayMetrics
-            val cardWidth = activeCards.width
-            val cardStart = (displayMetrics.widthPixels.toFloat() / 2) - (cardWidth / 2)
-            when(event.action) {
-                MotionEvent.ACTION_MOVE -> {
-                    val newX = event.rawX
 
-                    if (newX - cardWidth < cardStart) {
-                        activeCards.animate()
-                            .x(min(cardStart, newX - (cardWidth / 2)))
-                            .setDuration(0)
-                            .start()
-                    }
-                }
-                MotionEvent.ACTION_UP -> {
-                    var currentX = activeCards.x
-                    activeCards.animate()
-                        .x(cardStart)
-                        .setDuration(150)
-                        .setListener(
-                            object : AnimatorListenerAdapter() {
-                                override fun onAnimationEnd(animation: Animator) {
-                                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Default) {
-                                        delay(100)
-                                        if ( currentX < MIN_SWIPE_DISTANCE) {
-                                            currentX = 0f
-                                        }
-                                    }
-                                }
-                            }
-                        )
-                }
-            }
-            v.performClick()
-            return@setOnTouchListener true
+        view.findViewById<ImageButton>(R.id.edit_pen).setOnClickListener {
+            startActivity(Intent(this.context, FutureTrips::class.java))
         }
+
+        val viewPager = view.findViewById<ViewPager2>(R.id.active_trip_page_viewer)
+        viewPager.adapter = ViewPagerAdapter(destinationList, travelPeriodList, backgroundImgList)
+        viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     }
     private fun fetchView() {
         var futureTrips: List<FutureTrips> = arrayListOf()
@@ -123,11 +87,10 @@ class HomeFragment : Fragment() {
             val array = Base64.decode(trip.imgBackground!!.content, Base64.DEFAULT)
             trip.imgBackground.bitmap = BitmapFactory.decodeByteArray(array, 0, array.size)
 
-            requireView().findViewById<ImageView>(R.id.destination_background_img).setImageBitmap(trip.imgBackground.bitmap)
-            requireView().findViewById<TextView>(R.id.destination).text = trip.destination
-            requireView().findViewById<TextView>(R.id.travel_period).text = getString(R.string.travel_period_template, trip.startDate, trip.endDate)
+            destinationList.add(trip.destination)
+            travelPeriodList.add(getString(R.string.travel_period_template, trip.startDate.subSequence(5,10), trip.endDate))
+            backgroundImgList.add(BitmapFactory.decodeByteArray(array, 0, array.size))
         }
-
     }
 
     companion object {

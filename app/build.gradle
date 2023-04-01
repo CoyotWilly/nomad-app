@@ -57,10 +57,7 @@ dependencies {
     implementation 'io.ktor:ktor-client-content-negotiation:2.2.4'
     implementation 'io.ktor:ktor-serialization-kotlinx-json:2.2.4'
 
-    // camera and gallery pictures picking library - COIL
-    implementation("io.coil-kt:coil-compose:2.3.0")
-
-    // USER PERMISSIONS
-    implementation 'com.karumi:dexter:6.2.3'
+    // swappable view lib
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
 }

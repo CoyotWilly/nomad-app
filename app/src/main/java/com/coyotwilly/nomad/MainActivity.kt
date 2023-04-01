@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         navigationView = findViewById(R.id.bottom_navigation)
         ThemeWatcher(navigationView)
-
         supportFragmentManager.beginTransaction().replace(R.id.body_container, HomeFragment()).commit()
         navigationView.setOnItemSelectedListener setNavigationItemSelectedListener@{ menuItem ->
             var fragment: Fragment = HomeFragment()

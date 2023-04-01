@@ -30,12 +30,12 @@ import java.util.*
 class FutureTripCreate : AppCompatActivity() {
     private val CAMERA_PERMISSION_CODE = 1
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
-    private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
-    private lateinit var imgUri: Uri
     private val galleryImg = registerForActivityResult(ActivityResultContracts.GetContent()
     ) {
         findViewById<ImageView>(R.id.background_preview_future).setImageURI(it)
     }
+    private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
+    private lateinit var imgUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,8 +74,8 @@ class FutureTripCreate : AppCompatActivity() {
             runBlocking {
                 val job = launch {
                     val service = UserService.create()
-//                    service.postImg(userId, File(imgUri.toString()))
-                    service.postFutureTrip(userId, trip)
+                    val imgId: Long = service.postImg(userId, File(imgUri.toString()))
+                    service.postFutureTrip(userId,imgId, trip)
                 }
                 job.join()
             }

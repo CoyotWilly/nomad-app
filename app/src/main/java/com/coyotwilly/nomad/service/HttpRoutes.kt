@@ -22,7 +22,7 @@ object HttpRoutes {
     fun postNewImg(id: Long): String {
         return "$BASE_URL/img/add/$id"
     }
-    fun postNewTrip(id: Long): String {
-        return "$BASE_URL/user/$id/add-trip"
+    fun postNewTrip(id: Long, imgId: Long): String {
+        return "$BASE_URL/user/$id/add-trip/$imgId"
     }
 }

@@ -75,52 +75,59 @@
                 app:layout_constraintTop_toBottomOf="@+id/trip"
                 tools:ignore="VisualLintOverlap" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/active_trip"
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/active_trip"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="250dp"-->
+<!--                android:layout_marginHorizontal="20dp"-->
+<!--                android:layout_marginStart="2dp"-->
+<!--                android:layout_marginEnd="2dp"-->
+<!--                app:cardCornerRadius="11dp"-->
+<!--                app:cardElevation="11dp"-->
+<!--                app:cardUseCompatPadding="true"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/trip_counter">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/destination_background_img"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:contentDescription="@string/destination_img"-->
+<!--                    android:scaleType="fitXY"-->
+<!--                    android:src="@drawable/paris" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/destination"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="bottom"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginBottom="35dp"-->
+<!--                    android:text="@string/destination_place"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/travel_period"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="bottom"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:text="@string/date_example"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="italic" />-->
+<!--            </androidx.cardview.widget.CardView>-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/active_trip_page_viewer"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                app:cardCornerRadius="11dp"
-                app:cardElevation="11dp"
-                app:cardUseCompatPadding="true"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/trip_counter">
-
-                <ImageView
-                    android:id="@+id/destination_background_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/destination_img"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/paris" />
-
-                <TextView
-                    android:id="@+id/destination"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="35dp"
-                    android:text="@string/destination_place"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/travel_period"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="@string/date_example"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:textStyle="italic" />
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toBottomOf="@+id/trip_counter" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

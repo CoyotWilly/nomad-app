@@ -136,10 +136,10 @@ class UserServiceImpl(
         }
     }
 
-    override suspend fun postFutureTrip(id: Long, futureTrip: FutureTrips) {
+    override suspend fun postFutureTrip(id: Long, imgId: Long, futureTrip: FutureTrips) {
         try {
             client.post {
-                url(HttpRoutes.postNewTrip(id))
+                url(HttpRoutes.postNewTrip(id, imgId))
                 contentType(ContentType.Application.Json)
                 setBody(futureTrip)
             }
