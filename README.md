@@ -11,11 +11,11 @@ To run the app you will need:
 
 2. Open AM-backend in any IDE that runs Java (we recommend Intellij IDEA 🤫) and click RUN
 
-![backend run img](https://github.com/CoyotWilly/nomad-app/blob/master/readme_files/beckend_run.png)
+![backend run img](https://github.com/CoyotWilly/nomad-app/blob/master/readme_files/backend_run.png)
 
 >Check is everything running
 
-![backend running img](https://github.com/CoyotWilly/nomad-app/blob/master/readme_files/beckend_Ok.png)
+![backend running img](https://github.com/CoyotWilly/nomad-app/blob/master/readme_files/backend_Ok.png)
 
 3. Open Android Studio, install emulator and click RUN
 
