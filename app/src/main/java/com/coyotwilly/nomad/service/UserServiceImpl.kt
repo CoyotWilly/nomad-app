@@ -92,6 +92,26 @@ class UserServiceImpl(
         }
     }
 
+    override suspend fun getCommunityPhotos(): List<Image> {
+        return try {
+            client.get {
+                url(HttpRoutes.COMMUNITY_EXPLORE)
+            }.body()
+        } catch (e: RedirectResponseException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            arrayListOf()
+        } catch (e: ClientRequestException){
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            arrayListOf()
+        } catch (e: ServerResponseException) {
+            Log.e("REQUEST_ERROR",e.response.status.description)
+            arrayListOf()
+        } catch (e: Exception) {
+            Log.e("REQUEST_ERROR", e.message.toString())
+            arrayListOf()
+        }
+    }
+
     override suspend fun createUser(user: User): User? {
         return try {
             client.post{

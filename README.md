@@ -14,7 +14,7 @@ To run the app you will need:
 ![backend run img](https://github.com/CoyotWilly/nomad-app/blob/master/readme_files/backend_run.png)
 
 >Check is everything running
-
+>>In case of error, please create database with name Nomad in PHPMyAdmin
 ![backend running img](https://github.com/CoyotWilly/nomad-app/blob/master/readme_files/backend_Ok.png)
 
 3. Open Android Studio, install emulator and click RUN

@@ -17,8 +17,8 @@
     <string name="date_example">%1$d %2%s - %3$d %4$s %5$d</string>
     <string name="new_trip_creator">new trip creator icon</string>
     <string name="community_memories">Community memories</string>
-    <string name="new_memories_counter">%1$s new memories today</string>
-    <string name="new_mem_counter">%1$s new memory today</string>
+    <string name="new_memories_counter">%1$d new memories today</string>
+    <string name="new_mem_counter">%1$d new memory today</string>
     <string name="barcelona">Barcelona</string>
     <string name="singapore">Singapore</string>
     <string name="address_apart">"%1$s %2$s/%3$d   %4$s   %5$s "</string>

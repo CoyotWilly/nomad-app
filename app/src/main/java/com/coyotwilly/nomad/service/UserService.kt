@@ -13,6 +13,7 @@ interface UserService {
     suspend fun getFutureTrips(id: Long): List<FutureTrips>
     suspend fun getActiveTrips(id: Long): List<ActiveTrips>
     suspend fun getPastTrips(id: Long): List<PastTrips>
+    suspend fun getCommunityPhotos(): List<Image>
     suspend fun createUser(user: User): User?
     suspend fun postFutureTrip(id: Long, imgId: Long, futureTrip: FutureTrips)
     suspend fun postImg(id: Long, file: File, content: ByteArray): Long
