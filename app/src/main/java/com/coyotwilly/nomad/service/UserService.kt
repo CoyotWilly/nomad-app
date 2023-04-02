@@ -15,7 +15,7 @@ interface UserService {
     suspend fun getPastTrips(id: Long): List<PastTrips>
     suspend fun createUser(user: User): User?
     suspend fun postFutureTrip(id: Long, imgId: Long, futureTrip: FutureTrips)
-    suspend fun postImg(id: Long, file: File): Long
+    suspend fun postImg(id: Long, file: File, content: ByteArray): Long
     suspend fun canLogin(user: LoginCredentials): Boolean
     suspend fun idChecker(user: LoginCredentials): Long
     suspend fun userPasswordReset(user: LoginCredentials): User

@@ -158,14 +158,14 @@ class UserServiceImpl(
         }
     }
 
-    override suspend fun postImg(id: Long, file: File): Long {
+    override suspend fun postImg(id: Long, file: File, content: ByteArray): Long {
         return try {
             client.post {
                 url(HttpRoutes.postNewImg(id))
                 setBody(MultiPartFormDataContent(
                     formData {
                         append("description", "Some content")
-                        append("image", file.readBytes(), Headers.build {
+                        append("image", content, Headers.build {
                             append(HttpHeaders.ContentType, "image/*")
                             append(HttpHeaders.ContentDisposition, "filename=\"${file.name}\"")
                         })

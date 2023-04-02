@@ -1,12 +1,18 @@
 package com.coyotwilly.nomad
 
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -19,12 +25,17 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.collection.arraySetOf
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toFile
+import androidx.core.view.drawToBitmap
 import com.coyotwilly.nomad.model.FutureTrips
 import com.coyotwilly.nomad.service.UserService
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import okio.IOException
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.OutputStream
 import java.util.*
 
 class FutureTripCreate : AppCompatActivity() {
@@ -70,11 +81,15 @@ class FutureTripCreate : AppCompatActivity() {
 
         findViewById<AppCompatButton>(R.id.save_future_trip).setOnClickListener {
             val userId = getSharedPreferences("com.coyotwilly.app", Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
-            val trip = FutureTrips(0, "2024-02-19", "2024-02-29", "Mount Blanc", null)
+            val trip = FutureTrips(0, "1999-02-19", "1999-02-29", "Mount Blanc", null)
             runBlocking {
                 val job = launch {
+                    val bitmap = findViewById<ImageView>(R.id.background_preview_future).drawToBitmap()
+                    val stream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
                     val service = UserService.create()
-                    val imgId: Long = service.postImg(userId, File(imgUri.toString()))
+                    val imgId: Long = service.postImg(userId, imgUri.toFile(), stream.toByteArray())
                     service.postFutureTrip(userId,imgId, trip)
                 }
                 job.join()
@@ -144,14 +159,37 @@ class FutureTripCreate : AppCompatActivity() {
         ) { result ->
             try {
                 if (result) {
-                    findViewById<ImageView>(R.id.background_preview_future).setImageURI(null)
                     findViewById<ImageView>(R.id.background_preview_future).setImageURI(imgUri)
+                    val bitmap = findViewById<ImageView>(R.id.background_preview_future).drawToBitmap()
+                    saveImageToStorage(bitmap)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
+
+    private fun saveImageToStorage(bitmap: Bitmap) {
+        val fos: OutputStream
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val contentValues = ContentValues()
+                contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "Image_" + ".jpg")
+                contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+                contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + File.separator + "TestFolder")
+
+                val resolver = contentResolver
+                val imgUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+                fos = resolver.openOutputStream(Objects.requireNonNull(imgUri!!))!!
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                Objects.requireNonNull(fos)
+            }
+        } catch (e: IOException) {
+            Log.e("SAVE_ERROR", e.message.toString())
+        }
+    }
+
     private fun checkCameraPermissionAndOpenCamera() {
         if (ActivityCompat.checkSelfPermission(this ,android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
