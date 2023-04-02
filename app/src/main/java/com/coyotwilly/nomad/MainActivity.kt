@@ -17,15 +17,15 @@ class MainActivity : AppCompatActivity() {
         // sets transparent background for status bar
         // REQUIRES SDK >= 24
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        val userId = getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
 
         navigationView = findViewById(R.id.bottom_navigation)
         ThemeWatcher(navigationView)
-        supportFragmentManager.beginTransaction().replace(R.id.body_container, HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.body_container, HomeFragment(userId)).commit()
         navigationView.setOnItemSelectedListener setNavigationItemSelectedListener@{ menuItem ->
-            var fragment: Fragment = HomeFragment()
-            val userId = getSharedPreferences("com.coyotwilly.app",Context.MODE_PRIVATE).getLong("com.coyotwilly.app.user.Id", 0L)
+            var fragment: Fragment = HomeFragment(userId)
             when (menuItem.itemId) {
-                R.id.nav_home -> fragment = HomeFragment.newInstance(userId)
+                R.id.nav_home -> fragment = HomeFragment(userId)
                 R.id.nav_like -> fragment = LikeFragment()
                 R.id.nav_search -> fragment = SearchFragment()
                 R.id.nav_shop -> fragment = ShopFragment()

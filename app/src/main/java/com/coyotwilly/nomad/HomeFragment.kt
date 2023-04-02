@@ -28,7 +28,7 @@ import kotlinx.coroutines.runBlocking
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment(userId: Long) : Fragment() {
     private var themeChanged: Int = Configuration.UI_MODE_NIGHT_UNDEFINED
     private var destinationList = mutableListOf<String>()
     private var smallDestinationListFuture = mutableListOf<String>()
@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     private var backgroundImgListCommunity = mutableListOf<Bitmap>()
     private var smallBackgroundImgListFuture = mutableListOf<Bitmap>()
     private var smallBackgroundImgListPast = mutableListOf<Bitmap>()
+    private val userIdScoped = userId
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,11 +89,10 @@ class HomeFragment : Fragment() {
         var memoTrips: List<Image> = arrayListOf()
         runBlocking {
             val job = launch {
-                val userId = requireArguments().getLong("userId")
                 val service = UserService.create()
-                futureTrips = service.getFutureTrips(userId)
-                activeTrips = service.getActiveTrips(userId)
-                pastTrips = service.getPastTrips(userId)
+                futureTrips = service.getFutureTrips(userIdScoped)
+                activeTrips = service.getActiveTrips(userIdScoped)
+                pastTrips = service.getPastTrips(userIdScoped)
                 memoTrips = service.getCommunityPhotos()
             }
             job.join()
@@ -150,7 +150,7 @@ class HomeFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(userId: Long) =
-            HomeFragment().apply {
+            HomeFragment(userId).apply {
                 arguments = Bundle().apply {
                     putLong("userId", userId)
                 }
