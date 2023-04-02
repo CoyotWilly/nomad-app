@@ -88,11 +88,11 @@ class HomeFragment : Fragment() {
         var memoTrips: List<Image> = arrayListOf()
         runBlocking {
             val job = launch {
-                //val userId = requireArguments().getLong("userId") to replace 1
+                val userId = requireArguments().getLong("userId")
                 val service = UserService.create()
-                futureTrips = service.getFutureTrips(1)
-                activeTrips = service.getActiveTrips(1)
-                pastTrips = service.getPastTrips(1)
+                futureTrips = service.getFutureTrips(userId)
+                activeTrips = service.getActiveTrips(userId)
+                pastTrips = service.getPastTrips(userId)
                 memoTrips = service.getCommunityPhotos()
             }
             job.join()

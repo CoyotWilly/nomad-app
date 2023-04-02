@@ -29,9 +29,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_like -> fragment = LikeFragment()
                 R.id.nav_search -> fragment = SearchFragment()
                 R.id.nav_shop -> fragment = ShopFragment()
-                R.id.nav_person -> fragment = PersonFragment.newInstance(R.layout.fragment_person, false, userId)
-                // TODO:
-                //  -> REPLACE R.ID.FRAGMENT_PERSON WITH R.ID.PIN_AUTH_FRAGMENT FOR DEPLOYMENT
+                R.id.nav_person -> fragment = PersonFragment.newInstance(R.layout.fragment_pin_auth, false, userId)
             }
 
             supportFragmentManager.beginTransaction().replace(R.id.body_container, fragment).commit()
