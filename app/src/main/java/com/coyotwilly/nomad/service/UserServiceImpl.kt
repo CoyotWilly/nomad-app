@@ -8,7 +8,6 @@ import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
-import java.io.File
 
 class UserServiceImpl(
     private var client: HttpClient
@@ -178,7 +177,7 @@ class UserServiceImpl(
         }
     }
 
-    override suspend fun postImg(id: Long, file: File, content: ByteArray): Long {
+    override suspend fun postImg(id: Long, content: ByteArray): Long {
         return try {
             client.post {
                 url(HttpRoutes.postNewImg(id))
@@ -187,7 +186,7 @@ class UserServiceImpl(
                         append("description", "Some content")
                         append("image", content, Headers.build {
                             append(HttpHeaders.ContentType, "image/*")
-                            append(HttpHeaders.ContentDisposition, "filename=\"${file.name}\"")
+                            append(HttpHeaders.ContentDisposition, "filename=\"template.jpg\"")
                         })
                     },
                     boundary = "WebAppBoundary"

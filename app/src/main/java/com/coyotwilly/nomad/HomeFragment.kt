@@ -62,7 +62,7 @@ class HomeFragment(userId: Long) : Fragment() {
         }
 
         view.findViewById<ImageButton>(R.id.edit_pen).setOnClickListener {
-            startActivity(Intent(this.context, FutureTrips::class.java))
+            startActivity(Intent(this.context, FutureTripCreate::class.java))
         }
         // active trips adapter
         val viewPager = view.findViewById<ViewPager2>(R.id.active_trip_page_viewer)

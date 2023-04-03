@@ -25,7 +25,6 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.collection.arraySetOf
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.core.view.drawToBitmap
 import com.coyotwilly.nomad.model.FutureTrips
 import com.coyotwilly.nomad.service.UserService
@@ -89,7 +88,7 @@ class FutureTripCreate : AppCompatActivity() {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
 
                     val service = UserService.create()
-                    val imgId: Long = service.postImg(userId, imgUri.toFile(), stream.toByteArray())
+                    val imgId: Long = service.postImg(userId, stream.toByteArray())
                     service.postFutureTrip(userId,imgId, trip)
                 }
                 job.join()

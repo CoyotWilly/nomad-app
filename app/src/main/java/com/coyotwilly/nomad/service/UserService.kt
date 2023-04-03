@@ -6,7 +6,6 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import java.io.File
 
 interface UserService {
     suspend fun getUser(id: Long): User
@@ -16,7 +15,7 @@ interface UserService {
     suspend fun getCommunityPhotos(): List<Image>
     suspend fun createUser(user: User): User?
     suspend fun postFutureTrip(id: Long, imgId: Long, futureTrip: FutureTrips)
-    suspend fun postImg(id: Long, file: File, content: ByteArray): Long
+    suspend fun postImg(id: Long, content: ByteArray): Long
     suspend fun canLogin(user: LoginCredentials): Boolean
     suspend fun idChecker(user: LoginCredentials): Long
     suspend fun userPasswordReset(user: LoginCredentials): User
